@@ -12,5 +12,18 @@ conn.request("GET", "/json/cst/now", headers=headers)
 res = conn.getresponse()
 data = res.read()
 
-time = (data.decode("utf-8"))
+unprocessedtime = (data.decode("utf-8")).split(",")
+timeanddate = unprocessedtime[1]
+timeanddate = timeanddate.split("\"")
+timeanddate = timeanddate[3]
+timeanddate = timeanddate.split("T")
+#print(timeanddate)
+
+time = timeanddate[1]
+time = time.split("-")
+time = time[0]
+
+date = timeanddate[0]
+
 print(time)
+print(date)
