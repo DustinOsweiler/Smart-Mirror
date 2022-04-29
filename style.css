@@ -6,3 +6,13 @@ body {
   ul {
     font-family: "Lucida Console", monospace;
 }
+
+#demobox {
+  background-color: #FF69B4 ;
+  padding: 10px ;
+  border: 1px solid pink ;
+}
+
+.row {
+  height: 120px;
+}
