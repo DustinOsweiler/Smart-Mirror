@@ -9,7 +9,21 @@ accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMzhCUlgiLCJzdWIiOiI5WVc4SjciLCJp
 header = {'Authorization': 'Bearer {}'.format(accessToken)}
 response = requests.get("https://api.fitbit.com/1/user/-/profile.json", headers=header).json()
 
-print(response['user'])
+#print(response['user'])
+
+user = response['user']
+
+header = {'Authorization': 'Bearer {}'.format(accessToken)}
+response = requests.get("https://api.fitbit.com/1/user/-/activities/goals/daily.json", headers=header).json()
+
+#print(response)
+goals = response['goals']
+activegoal = goals['activeMinutes']
+stepGoal = goals['steps']
+
+Name = user['fullName']
+dailySteps = user['averageDailySteps']
+icon = user['avatar']
 
 
 #This is the Fitbit URL

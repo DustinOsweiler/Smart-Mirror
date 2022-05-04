@@ -1,6 +1,7 @@
 import requests
 import json
 import APIs.Time as Time
+#import Time
 
 header = { 
   "apikey": "ce14f140-c69c-11ec-b6b6-3dc5d45ec945"}
@@ -27,7 +28,7 @@ headers = {
   "apikey": "ce14f140-c69c-11ec-b6b6-3dc5d45ec945"}
 
 params = {
-   ("season_id",seasonid),
+   ("season_id", seasonid),
    ("date_to", Time.date)
 }
 
@@ -62,7 +63,22 @@ awayStats = recentGame['away_team']
 awayLogo = awayStats['logo']
 awayScore = gameStats['away_score']
 
+GameDate = recentGame['match_start']
+GameDate = GameDate.split(" ")[0]
+
 #print(awayLogo, homeLogo)
+
+#print(awayStats, homeStats)
+
+#print(Time.date)
+
+#print(soccer)
+
+#print(recentGame)
+
+#print(listofgames)
+
+#print(GameDate)
 
 #print(homeScore, awayScore)
 
