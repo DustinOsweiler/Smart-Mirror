@@ -19,23 +19,116 @@
       <title>Magic Mirror</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="style.css">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-      <link rel="stylesheet" href="style.css">
+      <!--link rel="stylesheet" href="styles.css"-->
+      <link href="https://fonts.googleapis.com/css2?family=Oswald" rel="stylesheet">
+      <style>
+        body {
+          font-family: 'Oswald', sans-serif;
+        }
+      </style>
       <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
       <script type=text/javascript>
         function halfsecond() {
           window.setInterval(function halfsecond() {
             loadnewTime(),
-            loadnewDate()
-          }, 500)
+            loadnewDate(),
+            loadTrain(),
+            loadBudget()
+          }, 500) //Half second
+
+          window.setInterval(function halfsecond() {
+            loadSoccer()
+          }, 3600000) //Hourly
+
+          window.setInterval(function halfsecond() {
+            loadBible()
+          }, 86400000) //Daily
+
+          window.setInterval(function halfsecond() {
+            loadweather()
+          }, 60000) //Every Minute
+
+          //window.setInterval(function halfsecond(){
+          //  loadNews()
+          //}, 8640000) 2.4 hours
+
+          window.setInterval(function halfsecond() {
+            loadFitBit()
+          }, 30000) //Every 30 seconds
+
+          function loadweather() {
+            $.ajax({
+              url: "/weather",
+              type: 'POST',
+              datatype: "json",
+              success: function (data) {
+                $(weather).replaceWith(data)
+              }
+            });
+          }
+
+          //function loadNews() {
+          //  $.ajax({
+          //    url: "/news",
+          //    type: 'POST',
+          //    datatype: "json",
+          //    success: function (data) {
+          //      $(News).replaceWith(data)
+          //    }
+          //  });
+          //}
+
+          function loadFitBit() {
+            $.ajax({
+              url: "/fitbit",
+              type: 'POST',
+              datatype: "json",
+              success: function (data) {
+                $(FitBit).replaceWith(data)
+              }
+            });
+          }
+
+          function loadBudget() {
+            $.ajax({
+              url: "/budget",
+              type: 'POST',
+              datatype: "json",
+              success: function (data) {
+                $(Budget).replaceWith(data)
+              }
+            });
+          }
+
+          function loadBible() {
+            $.ajax({
+              url: "/verse",
+              type: 'POST',
+              datatype: "json",
+              success: function (data) {
+                $(bible).replaceWith(data)
+              }
+            });
+          }
+
+          function loadSoccer() {
+            $.ajax({
+              url: "/soccer",
+              type: 'POST',
+              datatype: "json",
+              success: function (data) {
+                $(Soccer).replaceWith(data)
+              }
+            });
+          }
 
           function loadnewTime() {
             $.ajax({
               url: "/time",
               type: 'POST',
               datatype: "json",
-              success: function(data) {
+              success: function (data) {
                 $(time).replaceWith(data)
               }
             });
@@ -45,8 +138,18 @@
               url: "/date",
               type: 'POST',
               datatype: "json",
-              success: function(data) {
+              success: function (data) {
                 $(date).replaceWith(data)
+              }
+            });
+          }
+          function loadTrain() {
+            $.ajax({
+              url: "/train",
+              type: 'POST',
+              datatype: "json",
+              success: function (data) {
+                $(Train).replaceWith(data)
               }
             });
           }
@@ -57,15 +160,22 @@
       <div class="container-fluid bg-black">
         <div class="row h-25 bg-dark">
           <div class="col bg-dark text-white h5 text-start align-top">
-            <div id="weather"><pre> <img src="{{ weatherURL }}" > {{ weatherTemp }} &#176F
-      {{ weatherLoc }} 
+            <div id="weather">
+              <br>
+               &emsp;&emsp;<img src="{{ weatherURL }}" > {{ weatherTemp }} &#176F <br>
+      &emsp;&emsp;&emsp;&emsp;{{ weatherLoc }} 
+      </div>
       </div>
     <div class="col bg-dark text-white h5 text-center align-top">
-      <pre> <div id="time">{{ time }}</div>
-      <pre> <div id="date">{{ date }}</div>
+      <br>
+      <div id="time">{{ time }}</div>
+      <div id="date">{{ date }}</div>
       </div>
     <div class="col bg-dark text-white h5 text-end align-top">
-      News
+      <div id="News">
+        <br>
+        {{ News }} 
+        </div>
       </div>
   </div>
 </div>
@@ -73,14 +183,22 @@
 <div class="container-fluid bg-dark">
   <div class="row h-50 bg-dark">
     <div class="col bg-dark text-white h5 text-start align-middle">
-      <pre>    Home            Away
-      <pre> <img src="{{ homeUrl }}" >{{ homeScore }}    {{awayScore}}<img src='{{awayUrl}}'> 
-      <pre>             {{ gameDate }} </div>
+      <div id="Soccer">
+          &nbsp;&nbsp;&emsp;Home&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;Away <br>
+          <br>
+      <img src="{{ homeUrl }}" >{{ homeScore }}&nbsp;&nbsp;-&nbsp;&nbsp;{{awayScore}}<img src='{{awayUrl}}'> <br>
+      <br>
+        &nbsp;&nbsp;&emsp;&emsp;&emsp; {{ gameDate }} 
+        </div>
+      </div>
     <!--div class="col bg-dark text-grey h5 text-center align-middle">_</div-->
     <div class="col bg-dark text-white h5 text-end align-middle">
-      <pre> {{ spent }}/{{budget}}
-      <pre> {{ output }}
-      <pre> {{ left }}
+      <div id="Budget">
+      {{ spent }}/{{budget}} <br>
+      {{ output }} <br>
+      {{ left }} <br>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -96,18 +214,24 @@
 <div class="container-fluid bg-dark">
   <div class="row h-25 bg-dark">
     <div class="col bg-dark text-white h5 text-start">
-      <pre>
-       {{ station }}
-      {{ minutes }} Minutes
+      <div id="Train">
+      <p style="padding: 10px; border: 2px solid {{color}}; background-color: {{color}}; width: 275px; height: 75px;">
+        &nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;{{ station }} <br>
+      &emsp;&emsp;&emsp;&emsp;{{ minutes }} </p>
+      </div>
     </div>
     <div class="col bg-dark text-white h5 text-center">
-      {{ verse }} {{ text }}
+      <div id="bible">{{ verse }} {{ text }}</div>
     </div>
     <div class="col bg-dark text-white h5 text-end">
+      <div id="FitBit">
       <!--pre> <img src = "{{icon}}" -->
-      <pre> {{name}}
-      <pre> Avg Steps: {{ dailySteps }}
-      <pre>       Goals: Active Mins: {{activeGoal}} mins   Steps: {{stepGoal}}
+      {{name}} <br>
+      Avg Steps:&nbsp;{{ dailySteps }} <br>
+      Goals: <br>
+      Active Mins: {{activeGoal}} mins <br>
+      Steps: {{stepGoal}} <br>
+      </div>
     </div>
   </div>
 </div>

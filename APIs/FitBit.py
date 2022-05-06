@@ -25,6 +25,30 @@ Name = user['fullName']
 dailySteps = user['averageDailySteps']
 icon = user['avatar']
 
+def getFitbit():
+    accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMzhCUlgiLCJzdWIiOiI5WVc4SjciLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZXMiOiJyc29jIHJhY3QgcnNldCBybG9jIHJ3ZWkgcmhyIHJwcm8gcm51dCByc2xlIiwiZXhwIjoxNjUxODA2NDQ2LCJpYXQiOjE2NTEyMDE3MzZ9.Sk3p6rjBcd4z_QkFtsw1DDg1riCvR_aPwWUjKUNnNf4"
+
+    header = {'Authorization': 'Bearer {}'.format(accessToken)}
+    response = requests.get("https://api.fitbit.com/1/user/-/profile.json", headers=header).json()
+
+    #print(response['user'])
+
+    user = response['user']
+
+    header = {'Authorization': 'Bearer {}'.format(accessToken)}
+    response = requests.get("https://api.fitbit.com/1/user/-/activities/goals/daily.json", headers=header).json()
+
+    #print(response)
+    goals = response['goals']
+    activegoal = goals['activeMinutes']
+    stepGoal = goals['steps']
+
+    Name = user['fullName']
+    dailySteps = user['averageDailySteps']
+    icon = user['avatar']
+
+    return(activegoal, stepGoal, Name, dailySteps, icon)
+
 
 #This is the Fitbit URL
 #TokenURL = "https://api.fitbit.com/oauth2/token"
