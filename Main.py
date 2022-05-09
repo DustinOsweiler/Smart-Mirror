@@ -5,7 +5,7 @@ import APIs.Bible as Bible
 import APIs.Soccer as Soccer
 import APIs.Weather as Weather
 import APIs.Train as Train
-#import APIs.News as News
+import APIs.News as News
 import APIs.FitBit as fb
 import APIs.Budget as Budget
 
@@ -65,7 +65,7 @@ gameDate = Soccer.GameDate
 def getweather():
     weatherLocation = Weather.getLocation()
     weatherTemp = Weather.getTemp()
-    #weatherUrl = Weather.getURL()
+    weatherUrl = Weather.getURL()
     return jsonify('', render_template('weather.html', weatherLoc = weatherLocation, weatherTemp = weatherTemp, weatherURL = weatherUrl)) 
 
 weatherLoc = Weather.Location
@@ -84,13 +84,16 @@ station = Train.Station
 minutes = Train.Minutes
 color = Train.lineColor
 
-#@app.route("/news", methods = ['POST'])
-#def getnews():
-#    Headline = News.getNews()
-#    return jsonify('', render_template('News.html', News = Headline))
+@app.route("/news", methods = ['POST'])
+def getnews():
+    newNews = News.getNews()
+    Headline = newNews[0]
+    Favicon = newNews[1]
+    return jsonify('', render_template('News.html', News = Headline, Favicon = Favicon))
 
-#Headline = News.Headline
-Headline = "News"
+Headline = News.Headline
+Favicon = News.Favicon
+#Headline = "News"
 
 @app.route("/fitbit", methods = ['POST'])
 def getfitbit():
@@ -127,7 +130,7 @@ def index():
     return render_template('index.html', weatherLoc = weatherLoc, weatherURL = weatherUrl, weatherTemp = weatherTemp, 
     time = time, date = date, verse = verse, text = text, station = station, minutes = minutes, homeScore = homeScore, 
     awayScore = awayScore, homeUrl = homeUrl, awayUrl = awayUrl, gameDate = gameDate, stepGoal = stepGoal, name = name, dailySteps = dailySteps,
-    activeGoal = activeMinutes, icon = icon, spent = spent, budget = budget, output = output, left = left, News = Headline, color = color)  
+    activeGoal = activeMinutes, icon = icon, spent = spent, budget = budget, output = output, left = left, News = Headline, color = color, Favicon = Favicon)  
 
 if __name__ =='__main__':  
     app.run(debug = True)  

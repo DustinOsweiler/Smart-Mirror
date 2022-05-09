@@ -21,7 +21,7 @@ if(TotalBudget < TotalSpent):
     left = "You don't have any left to spend in your budget"
 else:
     output = "You are under budget!"
-    left = "You have " + str(TotalBudget - TotalSpent) + " left to spend"
+    left = "You have $" + str(TotalBudget - TotalSpent) + " left to spend this month"
 
 
 def getTotal():
@@ -46,7 +46,7 @@ def getTotal():
         left = "You don't have any left to spend in your budget"
     else:
         output = "You are under budget!"
-        left = "You have " + str(TotalBudget - TotalSpent) + " left to spend"
+        left = "You have $" + str(TotalBudget - TotalSpent) + " left to spend this month"
 
     return(TotalBudget)
 
@@ -72,7 +72,7 @@ def getSpent():
         left = "You don't have any left to spend in your budget"
     else:
         output = "You are under budget!"
-        left = "You have " + str(TotalBudget - TotalSpent) + " left to spend"
+        left = "You have $" + str(TotalBudget - TotalSpent) + " left to spend this month"
 
     return(TotalSpent)
 
@@ -98,7 +98,7 @@ def getOutput():
         left = "You don't have any left to spend in your budget"
     else:
         output = "You are under budget!"
-        left = "You have " + str(TotalBudget - TotalSpent) + " left to spend"
+        left = "You have $" + str(TotalBudget - TotalSpent) + " left to spend this month"
 
     return(output)
 
@@ -124,7 +124,7 @@ def getLeft():
         left = "You don't have any left to spend in your budget"
     else:
         output = "You are under budget!"
-        left = "You have " + str(TotalBudget - TotalSpent) + " left to spend"
+        left = "You have $" + str(TotalBudget - TotalSpent) + " left to spend this month"
 
     return(left)
     

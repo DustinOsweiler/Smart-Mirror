@@ -66,6 +66,8 @@ awayScore = gameStats['away_score']
 GameDate = recentGame['match_start']
 GameDate = GameDate.split(" ")[0]
 
+#print(homeLogo)
+
 def getSoccer():
   header = { 
   "apikey": "ce14f140-c69c-11ec-b6b6-3dc5d45ec945"}

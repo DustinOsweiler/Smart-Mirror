@@ -17,8 +17,13 @@ unprocessedweather = json.loads(unprocessedweather)
 Location = unprocessedweather['location']
 Location = Location['name']
 
+#print(unprocessedweather)
+
 unprocessedTemp = unprocessedweather['current']
 Temp = unprocessedTemp['temp_f']
+
+#print(unprocessedTemp)
+#print(len(unprocessedTemp))
 
 weatherURL = unprocessedTemp['condition']
 weatherURL = weatherURL['icon']

@@ -19,6 +19,11 @@ unprocessedNews = json.loads(unprocessedNews)
 topHeadline = (unprocessedNews['articles'])[0]
 #print(topHeadline)
 Headline = topHeadline['title']
+Favicon = topHeadline['source']
+if len(Favicon) == 3:
+    Favicon = Favicon['favicon']
+else:
+    Favicon = " "
 
 def getNews():
     conn = http.client.HTTPSConnection("google-news1.p.rapidapi.com")
@@ -37,7 +42,12 @@ def getNews():
     unprocessedNews = json.loads(unprocessedNews)
     topHeadline = (unprocessedNews['articles'])[0]
     Headline = topHeadline['title']
+    Favicon = topHeadline['source']
+    if len(Favicon) == 3:
+        Favicon = Favicon['favicon']
+    else:
+        Favicon = " "
 
     #print(Headline)
     
-    return(Headline)
+    return(Headline, Favicon)
